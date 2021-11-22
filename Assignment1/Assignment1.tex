@@ -1,0 +1,126 @@
+\documentclass[12pt, letterpaper, titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{color,graphicx,overpic} 
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{float}
+\usepackage{blindtext}
+\usepackage{longtable}
+\usepackage{scrextend}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{calc}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage[normalem]{ulem}
+\usepackage{tabularx}
+\usepackage{mathrsfs}
+\usepackage{bookmark}
+\usepackage{setspace}
+
+\mathtoolsset{showonlyrefs}  
+\allowdisplaybreaks
+
+\definecolor{mycolor}{rgb}{0, 0, 0}
+
+\geometry{top=2.54cm, left=2.54cm, right=2.54cm, bottom=2.54cm}
+\setlength{\headheight}{20pt}
+\setlength{\parskip}{0.3cm}
+\setlength{\parindent}{1cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Lora Ma - 1570935}
+\lhead{\textit{ECE 322 Assignment 1}}
+\rfoot{Page \thepage}
+
+\begin{document} 
+\singlespacing
+
+\section{Q1}
+Based on the material, in my opinion, the two most essential factors making software testing activities difficult are due to the following properties:
+\begin{enumerate}
+    \item An inherent property of modern software systems is complexity. It is difficult to understand all the possible states of the program and how each piece of the program interacts with other pieces of the program. Simply not being able to fully understand how a piece fits into the program can cause developers to write unreliable tests. Additionally, since each piece of the program is unique, each piece needs to be tested thoroughly -- predicting all valid and invalid inputs which can be time consuming and tedious. These are technical factors.
+    
+    \item Another inherent property of modern software systems is changeability. All successful software will undergo substantial change. Since tests are written to match the specifications at the time, when specifications change, the tests need to be changed as well. A small change in the codebase may lead to many tests failing and needed to be updated. This makes tests feel temporary and unimportant which can lead to developers putting little thought and effort into writting tests. These are also techinical factors.
+
+\end{enumerate}
+\section{Q2}
+\begin{tabular}{|l|l|}
+    \hline
+    Failure description                                                                                            & \begin{tabular}[c]{@{}l@{}}\textbf{Toyoto Prius Recall}\\ Vehicles may not go into fail-safe driving mode \\ when it's supposed to. This could lead to the \\ car losing power and stalling. More specifically, \\ vehicles will retain power steering and braking \\ capabilities, but if a vehicles stalls when \\driving at higher speeds, it could increase the \\ risk of a crash. \end{tabular} \\ \hline
+    Nature of software failure                                                                                     &  \begin{tabular}[c]{@{}l@{}} The cause of the failure was due to the inverter \\ in the Intelligent Power Module (IPM), a part \\ of the Toyota Hybrid Synergy Drive system. \\ Repeated driving under high load conditions can \\ cause high thermal stress in certain transistors \\ within the IPM. This could lead to an unusually \\ high voltage buildup, exceeding the limits of \\ software and circuits. This can trigger a fail-safe \\ mode in the software that reduces power,\\ but this can also sometimes cause a complete \\ loss of propulsion while driving. \end{tabular} \\ \hline
+    Any testing efforts regarding the failure?                                                                     & \begin{tabular}[c]{@{}l@{}} The fault was previously identified in another \\ recall, but the over 250 thousand cars in this \\ recall were not included because they were \\ originally equipped with a different version of the\\ relavent software. \end{tabular} \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Any follow up action taken? \\ Any plan to alleviate further problems?\end{tabular} & \begin{tabular}[c]{@{}l@{}} Toyota notified over 250 thousand Prius owners \\ of this recall. Dealers will provide a software \\ update for the hybrid system. If the vehicle \\ has already experienced a problem with certain\\ system components, the automaker will repair \\ or replace the parts. All repairs related to this \\ issue will be done free of charge. \end{tabular} \\ \hline
+    URL                                                                                                            &   \begin{tabular}[c]{@{}l@{}} https://www.consumerreports.org/car-recalls\\-defects/toyota-prius-prius-v-recalled-because\\-they-may-lose-power-and-stall/ \\\\
+    https://www.greencarreports.com/news/\\1128758\_2013-2017-toyota-prius-models-recalled\\-for-potential-hybrid-system-defect
+    \end{tabular}                  \\ \hline
+    \end{tabular}
+    \section{Q3}
+    \begin{enumerate}
+        \item Functionality
+            \begin{enumerate}
+                \item Does the vehicle consistently go to the desired destination?
+                \item Does the vehicle navigate roads without human input?
+                \item Does the vehicle drive at least as safe as humans do?
+                \item Does the manual override work?
+            \end{enumerate}
+        \item Performance and Reliability
+            \begin{enumerate}
+                \item How reliable is the vehicle in detecting obstacles?
+                \item How quickly does the vehicle react to avoid collisions?
+                \item Does the vehicle work equally as well in different driving conditions such as slippery roads, windy weather, and snow storms?
+                \item Can the vehicle recieve consistent updates?
+            \end{enumerate}
+        \item Efficiency 
+            \begin{enumerate}
+                \item Does the vehicle find the most efficient path to the destination?
+                \item Does the software use the most efficient algorithms?
+                \item Does the software process environment information efficiently?
+            \end{enumerate}
+        \item Maintainability
+            \begin{enumerate}
+                \item Is the software able to be easily changed?
+                \item Is the software easily updated?
+                \item Is the software readable?
+            \end{enumerate}
+        \item Usability
+            \begin{enumerate}
+                \item Is it easy to learn how to use the vehicle to get to a destination?
+                \item Is it easy to know how to take over the vehicle?
+                \item Are the controls intuitive?
+            \end{enumerate}
+        \item Portability
+            \begin{enumerate}
+                \item How difficult would if be to use the software in different cars?
+                \item What hardware is the software compatible with?
+            \end{enumerate}
+    \end{enumerate}
+
+    \begin{tabular}{|l|l|l|}
+        \hline
+        Risk Category & Technical Risk & Business Risk \\ \hline
+        \textbf{Functionality} & & \\ \hline
+        Car crashing while autonomously driving & 3  &  1  \\ \hline
+        Car going to wrong location & 2 & 1 \\ \hline
+        Car unable to be overrided & 4  &  1               \\ \hline
+        \textbf{Performance and Reliability} & & \\ \hline
+        Car unable to detect obstacles accurately & 3  &  2  \\ \hline
+        Car doesn't work as well in different weather conditions & 2 & 3 \\ \hline
+        \textbf{Efficiency} & & \\ \hline
+        Car calculates inefficient path to destination & 4 &  3  \\ \hline
+        Software uses the hardware inefficiently & 2 & 5 \\ \hline
+        \textbf{Maintainability} & & \\ \hline
+        Software difficult to change & 1 &  5  \\ \hline
+        Software not documented well & 1 & 5 \\ \hline
+        \textbf{Usability} & & \\ \hline
+        Not easy to learn or not intuitive & 4 &  2  \\ \hline
+        \textbf{Portability} & & \\ \hline
+        Software can not be used in other cars & 1 &  2  \\ \hline
+    \end{tabular}
+\end{document}

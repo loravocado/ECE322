@@ -1,0 +1,257 @@
+\documentclass[12pt, letterpaper, titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{color,graphicx,overpic} 
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{float}
+\usepackage{blindtext}
+\usepackage{longtable}
+\usepackage{scrextend}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{calc}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage[normalem]{ulem}
+\usepackage{tabularx}
+\usepackage{mathrsfs}
+\usepackage{bookmark}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage{ltablex}
+
+\mathtoolsset{showonlyrefs}  
+\allowdisplaybreaks
+
+\definecolor{mycolor}{rgb}{0, 0, 0}
+
+\geometry{top=2.54cm, left=2.54cm, right=2.54cm, bottom=2.54cm}
+\setlength{\headheight}{20pt}
+\setlength{\parskip}{0.3cm}
+\setlength{\parindent}{1cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Lora Ma - 1570935}
+\lhead{\textit{ECE 322 Assignment 4}}
+\rfoot{Page \thepage}
+
+\begin{document} 
+\singlespacing
+
+\section{Q1}
+We have derived the following equations from the graph:
+\begin{align}
+    p_\text{A} &= 0.8p_\text{H} \\
+    p_\text{B} &= 0.7p_\text{A} + 0.5p_\text{E} \\
+    p_\text{C} &= 0.7 p_\text{D} + p_\text{B} \\
+    p_\text{D} &= 0.5p_\text{E} \\
+    p_\text{E} &= 0.3p_\text{A} \\
+    p_\text{F} &= 0.6p_\text{C} \\
+    p_\text{G} &= 0.2p_\text{H} + 0.4p_\text{C} + p_\text{F} \\
+    p_\text{H} &= p_\text{G} + 0.3p_\text{D} \\ 
+    1 &= p_\text{A} + p_\text{B} + p_\text{C} + p_\text{D} + p_\text{E} + p_\text{F} + p_\text{G} + p_\text{H} \\
+\end{align}
+Solving these equations gets us the following values:
+\begin{align}
+    p_\text{A} &= 0.1592 \\
+    p_\text{B} &= 0.1353 \\
+    p_\text{C} &= 0.1520 \\
+    p_\text{D} &= 0.0239 \\
+    p_\text{E} &= 0.0477 \\
+    p_\text{F} &= 0.0912 \\
+    p_\text{G} &= 0.1918 \\
+    p_\text{H} &= 0.0199 \\
+\end{align}
+The order that the states should be tested in is
+\begin{equation}
+    H \rightarrow G \rightarrow A \rightarrow C \rightarrow B \rightarrow F \rightarrow E \rightarrow D
+\end{equation}
+
+\section{Q2}
+For unknown relationships:
+\begin{align}
+    \text{\# of test cases} &= |A| \times |B| \times |C| \times |D| \times |E| \times |F| \\
+    &= 5 \times 5 \times 3 \times 5 \times 2 \times 3 \\
+    &= 2250 \\
+\end{align}
+Knowing the following functional relationships,
+\begin{align}
+    x &=  A \times D \times E \\
+      &= 5 \times 5 \times 2 \\
+      &= 50 \\\\
+    y &= B \\
+    &= 5 \\\\
+    z &= C \times F \\
+    &= 3 \times 3 \\
+    &= 9\\
+\end{align}
+the upper bound of the number of test cases is:
+\begin{align}
+    \text{\# of test cases} &= x + y + z \\
+    &= 50 + 5 + 9 \\
+    &= 64 \\
+\end{align}
+The following tables are an example set of test cases. Note that every test case requires a value for A, B, C, D, E, F. If a value is not provided for a variable in the proposed test case below, it means that any of the possible values may be selected.
+\begin{table}[H]
+    \centering
+    \caption{Test cases for x}
+    \begin{tabular}{|r|r|r|l|r|r|r|l|r|r|r|l|}
+    \hline
+    \multicolumn{1}{|l|}{Test \#} & \multicolumn{1}{l|}{A} & \multicolumn{1}{l|}{D} & E & \multicolumn{1}{l|}{Test \#} & \multicolumn{1}{l|}{A} & \multicolumn{1}{l|}{D} & E & \multicolumn{1}{l|}{Test \#} & \multicolumn{1}{l|}{A} & \multicolumn{1}{l|}{D} & E \\ \hline
+    1                             & 0                      & 7                      & Y & 18                           & 1                      & 10                     & N & 35                           & 3                      & 9                      & Y \\ \hline
+    2                             & 0                      & 7                      & N & 19                           & 1                      & 11                     & Y & 36                           & 3                      & 9                      & N \\ \hline
+    3                             & 0                      & 8                      & Y & 20                           & 1                      & 11                     & N & 37                           & 3                      & 10                     & Y \\ \hline
+    4                             & 0                      & 8                      & N & 21                           & 2                      & 7                      & Y & 38                           & 3                      & 10                     & N \\ \hline
+    5                             & 0                      & 9                      & Y & 22                           & 2                      & 7                      & N & 39                           & 3                      & 11                     & Y \\ \hline
+    6                             & 0                      & 9                      & N & 23                           & 2                      & 8                      & Y & 40                           & 3                      & 11                     & N \\ \hline
+    7                             & 0                      & 10                     & Y & 24                           & 2                      & 8                      & N & 41                           & 4                      & 7                      & Y \\ \hline
+    8                             & 0                      & 10                     & N & 25                           & 2                      & 9                      & Y & 42                           & 4                      & 7                      & N \\ \hline
+    9                             & 0                      & 11                     & Y & 26                           & 2                      & 9                      & N & 43                           & 4                      & 8                      & Y \\ \hline
+    10                            & 0                      & 11                     & N & 27                           & 2                      & 10                     & Y & 44                           & 4                      & 8                      & N \\ \hline
+    11                            & 1                      & 7                      & Y & 28                           & 2                      & 10                     & N & 45                           & 4                      & 9                      & Y \\ \hline
+    12                            & 1                      & 7                      & N & 29                           & 2                      & 11                     & Y & 46                           & 4                      & 9                      & N \\ \hline
+    13                            & 1                      & 8                      & Y & 30                           & 2                      & 11                     & N & 47                           & 4                      & 10                     & Y \\ \hline
+    14                            & 1                      & 8                      & N & 31                           & 3                      & 7                      & Y & 48                           & 4                      & 10                     & N \\ \hline
+    15                            & 1                      & 9                      & Y & 32                           & 3                      & 7                      & N & 49                           & 4                      & 11                     & Y \\ \hline
+    16                            & 1                      & 9                      & N & 33                           & 3                      & 8                      & Y & 50                           & 4                      & 11                     & N \\ \hline
+    17                            & 1                      & 10                     & Y & 34                           & 3                      & 8                      & N & \multicolumn{1}{l|}{}        & \multicolumn{1}{l|}{}  & \multicolumn{1}{l|}{}  &   \\ \hline
+    \end{tabular}
+    \end{table}
+    \begin{table}[H]
+        \centering
+        \caption{Test cases for y}
+        \begin{tabular}{|r|l|}
+        \hline
+        \multicolumn{1}{|l|}{Test \#} & B \\ \hline
+        51                            & A \\ \hline
+        52                            & B \\ \hline
+        53                            & C \\ \hline
+        54                            & D \\ \hline
+        55                            & E \\ \hline
+        \end{tabular}
+    \end{table}
+    
+    \begin{table}[H]
+        \centering
+        \caption{Test cases for z}
+        \begin{tabular}{|r|r|l|}
+        \hline
+        \multicolumn{1}{|l|}{Test \#} & \multicolumn{1}{l|}{C} & F                     \\ \hline
+        56                            & 100                    & $\alpha$ \\ \hline
+        57                            & 100                    & $\beta$  \\ \hline
+        58                            & 100                    & $\gamma$ \\ \hline
+        59                            & 200                    & $\alpha$ \\ \hline
+        60                            & 200                    & $\beta$  \\ \hline
+        61                            & 200                    & $\gamma$ \\ \hline
+        62                            & 300                    & $\alpha$ \\ \hline
+        63                            & 300                    & $\beta$  \\ \hline
+        64                            & 300                    & $\gamma$ \\ \hline
+        \end{tabular}
+        \end{table}
+\section{Q3}
+For simplicity, we will simplify the following keywords:
+\begin{itemize}
+    \item HARDKEYBOARDHIDDEN = HKH
+    \item KEYBOARDHIDDEN = KH 
+    \item KEYBOARD = K
+    \item NAVIGATIONHIDDEN = NH 
+    \item NAVIGATION = N
+    \item ORIENTATION = O
+    \item SCREENLAYOUT\_LONG = SLL
+    \item SCREENLAYOUT\_SIZE = SLS
+    \item TOUCHSCREEN = T
+    \item UNDEFINED = N/A
+    \item LANDSCAPE = LSP 
+    \item QWERTY = Q
+    \item NOTOUCH = NT 
+    \item PORTRAIT = P 
+    \item TRACKBALL = TB
+\end{itemize}
+
+\scriptsize
+\begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|X|X|X|}
+    \caption{Results using pairwise testing} \\ \hline
+    \textbf{\#} & \textbf{HKH} & \textbf{KH} & \textbf{K} & \textbf{NH} & \textbf{N} & \textbf{O} & \textbf{SLL} & \textbf{SLS} & \textbf{T} \\ \hline
+    1 & NO & NO & 12KEY & NO & DPAD & LSP & MASK & LRG & FNGR \\ \hline
+    2 & N/A & N/A & NOKEYS & N/A & NONAV & P & NO & MASK & FNGR \\ \hline
+    3 & YES & YES & Q & YES & TB & SQR & N/A & NORM & FNGR \\ \hline
+    4 & YES & N/A & N/A & NO & N/A & N/A & YES & SML & NT \\ \hline
+    5 & N/A & NO & N/A & YES & WHEEL & N/A & N/A & N/A & STYLUS \\ \hline
+    6 & NO & YES & NOKEYS & N/A & WHEEL & SQR & YES & N/A & N/A \\ \hline
+    7 & NO & N/A & Q & YES & N/A & LSP & NO & LRG & N/A \\ \hline
+    8 & N/A & YES & 12KEY & NO & NONAV & SQR & MASK & SML & STYLUS \\ \hline
+    9 & YES & NO & NOKEYS & N/A & TB & LSP & MASK & MASK & NT \\ \hline
+    10 & NO & NO & Q & NO & NONAV & P & YES & NORM & NT \\ \hline
+    11 & YES & YES & 12KEY & YES & DPAD & P & NO & N/A & NT \\ \hline
+    12 & N/A & N/A & 12KEY & N/A & DPAD & N/A & N/A & NORM & N/A \\ \hline
+    13 & N/A & N/A & Q & N/A & WHEEL & LSP & MASK & SML & STYLUS \\ \hline
+    14 & NO & YES & N/A & N/A & N/A & P & N/A & LRG & STYLUS \\ \hline
+    15 & N/A & NO & N/A & NO & TB & SQR & NO & SML & N/A \\ \hline
+    16 & YES & YES & NOKEYS & YES & NONAV & N/A & N/A & MASK & N/A \\ \hline
+    17 & N/A & N/A & NOKEYS & NO & N/A & SQR & YES & LRG & NT \\ \hline
+    18 & NO & N/A & N/A & NO & TB & N/A & MASK & N/A & FNGR \\ \hline
+    19 & YES & YES & N/A & NO & WHEEL & LSP & N/A & NORM & NT \\ \hline
+    20 & YES & NO & 12KEY & YES & N/A & P & MASK & NORM & N/A \\ \hline
+    21 & YES & YES & 12KEY & YES & WHEEL & P & YES & MASK & STYLUS \\ \hline
+    22 & NO & YES & NOKEYS & NO & DPAD & SQR & YES & MASK & STYLUS \\ \hline
+    23 & YES & YES & Q & YES & DPAD & N/A & NO & SML & STYLUS \\ \hline
+    24 & YES & YES & N/A & NO & NONAV & LSP & YES & N/A & FNGR \\ \hline
+    25 & YES & YES & N/A & NO & DPAD & N/A & N/A & LRG & STYLUS \\ \hline
+    26 & NO & YES & NOKEYS & NO & TB & P & YES & SML & STYLUS \\ \hline
+    27 & YES & YES & Q & NO & WHEEL & P & NO & NORM & STYLUS \\ \hline
+    28 & YES & YES & Q & NO & N/A & P & N/A & N/A & FNGR \\ \hline
+    29 & YES & YES & N/A & NO & WHEEL & P & N/A & SML & FNGR \\ \hline
+    30 & YES & YES & N/A & NO & WHEEL & P & N/A & MASK & STYLUS \\ \hline
+    31 & YES & YES & Q & NO & WHEEL & P & N/A & MASK & STYLUS \\ \hline
+    32 & YES & YES & NOKEYS & NO & WHEEL & P & N/A & NORM & STYLUS \\ \hline
+    33 & YES & YES & 12KEY & NO & TB & P & N/A & LRG & STYLUS \\ \hline
+    34 & YES & YES & N/A & NO & WHEEL & P & N/A & LRG & STYLUS \\ \hline
+    35 & YES & YES & N/A & NO & N/A & P & N/A & MASK & STYLUS \\ \hline
+    36 & YES & YES & N/A & NO & NONAV & P & N/A & LRG & STYLUS \\ \hline
+\end{tabularx}
+\normalsize
+There are 36 tests using pairwise testing. This is significantly less than the 172800 tests when considering all combinations. \\\\
+To calculate the number of tests required to consider all combinations of input values, we need to perform the following calculation:
+\begin{align}
+    \text{\# of tests} &= 3 \times 3 \times 4 \times 3 \times 5 \times 4 \times 4 \times 5 \times 4\\
+    &= 172800 \\
+\end{align}
+\section{Q4}
+For terminal symbol coverage:
+\begin{align}
+    \text{\# of tests} &= \text{\# of ops} + \text{\# of letters} + \text{\# of digits} \\
+    &= 4 + 52 + 10 \\
+    &= 66 \\
+\end{align}
+For production coverage:
+\begin{align}
+    \text{\# of tests} &= \text{\# of expr possibilities} + \text{\# of id possibilities} \\ 
+    &+ \text{\# of num possibilities} + \text{\# of symbol possibilities}\\
+    &= 3 + 2 + 2 + 66 \\
+    &= 73 \\
+\end{align}
+
+For derivation coverage, there are an infinite amount of tests because of the first expr rule
+
+\begin{table}[H]
+    \centering
+    \caption{Possible test cases}
+    \begin{tabular}{|r|l|}
+    \hline
+    \multicolumn{1}{|l|}{Test \#} & Test case               \\ \hline
+    1                             & a                       \\ \hline
+    3                             & ab                      \\ \hline
+    4                             & 6  \\ \hline
+    5                             & 67 \\ \hline
+    6                             & A+4                     \\ \hline
+    7                             & AB + 47                 \\ \hline    8                             & A + 47                 \\ \hline
+    7                             & B + 7                 \\ \hline
+    \end{tabular}
+    \end{table}
+\end{document}  

@@ -1,0 +1,175 @@
+\documentclass[12pt, letterpaper, titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{color,graphicx,overpic} 
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{float}
+\usepackage{blindtext}
+\usepackage{longtable}
+\usepackage{scrextend}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{calc}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage[normalem]{ulem}
+\usepackage{tabularx}
+\usepackage{mathrsfs}
+\usepackage{bookmark}
+\usepackage{setspace}
+
+\mathtoolsset{showonlyrefs}  
+\allowdisplaybreaks
+
+\definecolor{mycolor}{rgb}{0, 0, 0}
+
+\geometry{top=2.54cm, left=2.54cm, right=2.54cm, bottom=2.54cm}
+\setlength{\headheight}{20pt}
+\setlength{\parskip}{0.3cm}
+\setlength{\parindent}{1cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Lora Ma - 1570935}
+\lhead{\textit{ECE 322 Assignment 2}}
+\rfoot{Page \thepage}
+
+\begin{document} 
+\singlespacing
+
+\section{Q1}
+Coincidental correctness occurs when no failure is detected even though a fault has been executed. For example, if we wanted to implement $cos(yx)$ and we wanted to test $y = 2$ and $x = 0$, we would expect the program to calculate the answer through something like $cos((2)(0)) = cos(0) = 1$. Had our implementation been incorrect and be something like $cos(\frac{1}{2}yx)$, then the output would still be 0. So although in this case, it returned the correct answer, the implementation is incorrect. This is just a coincidence that the answer is right for this scenario.
+
+\section{Q2}
+\begin{enumerate}
+    \item Maximal number of rules = 12. This is calculated using: Gender(2 options) * City dwelling(2 options) * Age groups(3 options) = 2*2*3 = 12 \\
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+    \hline
+    Rule \#                                              & 1             & 2             & 3             & 4             & 5                                                                             & 6                                                                            & 7                                                                            & 8                                                                            & 9                & 10               & 11               & 12               \\ \hline
+    Gender                                               & M             & F             & M             & F             & M                                                                             & F                                                                            & M                                                                            & F                                                                            & M                & F                & M                & F                \\ \hline
+    City                                                 & Yes           & Yes           & No            & No            & Yes                                                                           & Yes                                                                          & No                                                                           & No                                                                           & Yes              & Yes              & No               & No               \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Age \\ Group\end{tabular} & \textless{}25 & \textless{}25 & \textless{}25 & \textless{}25 & \begin{tabular}[c]{@{}l@{}}\textless{}65 \&\\ \textgreater{}= 25\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textless{}65 \&\\ \textgreater{}=25\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textless{}65 \&\\ \textgreater{}=25\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textless{}65 \&\\ \textgreater{}=25\end{tabular} & \textgreater{}65 & \textgreater{}65 & \textgreater{}65 & \textgreater{}65 \\ \hline
+    A                                                    & X             &               &               &               & X                                                                             &                                                                              &                                                                              &                                                                              & X                &                  &                  &                  \\ \hline
+    B                                                    & X             &               & X             &               &                                                                               &                                                                              &                                                                              &                                                                              &                  &                  &                  &                  \\ \hline
+    C                                                    &               &               &               &               &                                                                               &                                                                              &                                                                              & X                                                                            &                  &                  &                  &                  \\ \hline
+    D                                                    & X             & X             & X             & X             & X                                                                             & X                                                                            & X                                                                            & X                                                                            &                  & X                &                  & X                \\ \hline
+    \end{tabular}
+    \item Simplified table \\
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+        \hline
+        Rule \#                                             & 1             & 2 & 3             & 4             & 5                                                                           & 6                                                                           & 7                                                                           & 8                & 9                & 10               \\ \hline
+        Gender                                              & M             & F & M             & F             & M                                                                           & M                                                                           & F                                                                           & M                & F                & M                \\ \hline
+        City                                                & Y             & Y & N             & N             & Y                                                                           & N                                                                           & N                                                                           & Y                & Y                & N                \\ \hline
+        \begin{tabular}[c]{@{}l@{}}Age\\ Group\end{tabular} & \textless{}25 & - & \textless{}25 & \textless{}25 & \begin{tabular}[c]{@{}l@{}}\textless{}65 \&\\ \textgreater{}25\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textless{}65 \&\\ \textgreater{}25\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textless{}65 \&\\ \textgreater{}25\end{tabular} & \textgreater{}65 & \textgreater{}65 & \textgreater{}65 \\ \hline
+        A                                                   & X             &   &               &               & X                                                                           &                                                                             &                                                                             & X                &                  &                  \\ \hline
+        B                                                   & X             &   & X             &               &                                                                             &                                                                             &                                                                             &                  &                  &                  \\ \hline
+        C                                                   &               &   &               &               &                                                                             &                                                                             & X                                                                           &                  &                  &                  \\ \hline
+        D                                                   & X             & X & X             & X             & X                                                                           & X                                                                           & X                                                                           &                  & X                &                  \\ \hline
+        \end{tabular}
+\end{enumerate}
+\section{Q3}
+The subdomain is bounded by the linear functions
+\begin{align}
+    y \geq -x \\
+    y < 6 \\ 
+    x-2 \leq y \\
+    x  > 1 \\
+    z > 0 \\
+    z < 6 \\
+\end{align}
+\subsection*{EPC Strategy}
+The EPC strategy places the test points at the corners of the shape. The min for x is 1 and the max for x is 8. The min for y is -1 and the max for y is 6. The min for z is 0 and the max is 6. We are expecting $4^3 + 1 = 65$ test cases. The extreme points chosen are (8, 8.1, 1, 0.9) for x, (6, 6.1, -1, -1.1) for y, and (6, 6.1, 0, -0.1) \\
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+    \hline
+    Test & x   & y    & z    & Pass? & Test & x   & y    & z    & Pass? & Test & x   & y    & z    & Pass? \\ \hline
+    1    & 8   & 6    & 6    & No       & 23   & 8.1 & 6.1  & -1   & No    & 45   & 1   & -1.1 & 6    & No    \\ \hline
+    2    & 8   & 6    & 6.1  & No       & 24   & 8.1 & 6.1  & -1.1 & No    & 46   & 1   & -1.1 & 6.1  & No    \\ \hline
+    3    & 8   & 6    & -1   & No       & 25   & 8.1 & -1   & 6    & No    & 47   & 1   & -1.1 & -1   & No    \\ \hline
+    4    & 8   & 6    & -1.1 & No       & 26   & 8.1 & -1   & 6.1  & No    & 48   & 1   & -1.1 & -1.1 & No    \\ \hline
+    5    & 8   & 6.1  & 6    & No       & 27   & 8.1 & -1   & -1   & No    & 49   & 0.9 & 6    & 6    & No    \\ \hline
+    6    & 8   & 6.1  & 6.1  & No       & 28   & 8.1 & -1   & -1.1 & No    & 50   & 0.9 & 6    & 6.1  & No    \\ \hline
+    7    & 8   & 6.1  & -1   & No       & 29   & 8.1 & -1.1 & 6    & No    & 51   & 0.9 & 6    & -1   & No    \\ \hline
+    8    & 8   & 6.1  & -1.1 & No       & 30   & 8.1 & -1.1 & 6.1  & No    & 52   & 0.9 & 6    & -1.1 & No    \\ \hline
+    9    & 8   & -1   & 6    & No       & 31   & 8.1 & -1.1 & -1   & No    & 53   & 0.9 & 6.1  & 6    & No    \\ \hline
+    10   & 8   & -1   & 6.1  & No       & 32   & 8.1 & -1.1 & -1.1 & No    & 54   & 0.9 & 6.1  & 6.1  & No    \\ \hline
+    11   & 8   & -1   & -1   & No       & 33   & 1   & 6    & 6    & No    & 55   & 0.9 & 6.1  & -1   & No    \\ \hline
+    12   & 8   & -1   & -1.1 & No       & 34   & 1   & 6    & 6.1  & No    & 56   & 0.9 & 6.1  & -1.1 & No    \\ \hline
+    13   & 8   & -1.1 & 6    & No       & 35   & 1   & 6    & -1   & No    & 57   & 0.9 & -1   & 6    & No    \\ \hline
+    14   & 8   & -1.1 & 6.1  & No       & 36   & 1   & 6    & -1.1 & No    & 58   & 0.9 & -1   & 6.1  & No    \\ \hline
+    15   & 8   & -1.1 & -1   & No       & 37   & 1   & 6.1  & 6    & No    & 59   & 0.9 & -1   & -1   & No    \\ \hline
+    16   & 8   & -1.1 & -1.1 & No       & 38   & 1   & 6.1  & 6.1  & No    & 60   & 0.9 & -1   & -1.1 & No    \\ \hline
+    17   & 8.1 & 6    & 6    & No       & 39   & 1   & 6.1  & -1   & No    & 61   & 0.9 & -1.1 & 6    & No    \\ \hline
+    18   & 8.1 & 6    & 6.1  & No       & 40   & 1   & 6.1  & -1.1 & No    & 62   & 0.9 & -1.1 & 6.1  & No    \\ \hline
+    19   & 8.1 & 6    & -1   & No       & 41   & 1   & -1   & 6    & No    & 63   & 0.9 & -1.1 & -1   & No    \\ \hline
+    20   & 8.1 & 6    & -1.1 & No       & 42   & 1   & -1   & 6.1  & No    & 64   & 0.9 & -1.1 & -1.1 & No    \\ \hline
+    21   & 8.1 & 6.1  & 6    & No       & 43   & 1   & -1   & -1   & No    & 65   & 1   & 1    & 1    & No    \\ \hline
+    22   & 8.1 & 6.1  & 6.1  & No       & 44   & 1   & -1   & -1.1 & No    &      &     &      &      &       \\ \hline
+    \end{tabular}
+    \subsection*{Weak Nx1 Strategy}
+    For the weak nx1 strategy \\
+        \begin{tabular}{|r|r|r|r|l|}
+        \hline
+        \multicolumn{1}{|l|}{Test Number} & \multicolumn{1}{l|}{x} & \multicolumn{1}{l|}{y} & \multicolumn{1}{l|}{z} & Passed? \\ \hline
+        1                                 & 1                      & 0                      & 1                      & No      \\ \hline
+        2                                 & 6                      & 3                      & 4                      & No      \\ \hline
+        3                                 & 6                      & 5                      & 3                      & Yes     \\ \hline
+        4                                 & 6                      & 6                      & 2                      & No      \\ \hline
+        5                                 & 2                      & 6                      & 5                      & No      \\ \hline
+        6                                 & 7                      & 5                      & 0                      & No      \\ \hline
+        7                                 & 2                      & 3                      & 3                      & Yes     \\ \hline
+        8                                 & 7                      & 5                      & 6                      & No      \\ \hline
+        9                                 & 3                      & 2                      & 5                      & Yes     \\ \hline
+        10                                & 1                      & 4                      & 4                      & No      \\ \hline
+        11                                & 4                      & 4                      & 0                      & No      \\ \hline
+        12                                & 4                      & 6                      & 4                      & No      \\ \hline
+        13                                & 1                      & 6                      & 5                      & No      \\ \hline
+        14                                & 4                      & 4                      & 6                      & No      \\ \hline
+        15                                & 3                      & 2                      & 1                      & Yes     \\ \hline
+        16                                & 3                      & 1                      & 6                      & No      \\ \hline
+        17                                & 3                      & 1                      & 2                      & Yes     \\ \hline
+        18                                & 3                      & 1                      & 0                      & No      \\ \hline
+        19                                & 5                      & 3                      & 3                      & Yes     \\ \hline
+        20                                & 1                      & -1                     & 1                      & Yes     \\ \hline
+        21                                & 2                      & 3                      & 0                      & No      \\ \hline
+        22                                & 7                      & 5                      & 5                      & Yes     \\ \hline
+        23                                & 3                      & 2                      & 3                      & Yes     \\ \hline
+        24                                & 2                      & 3                      & 6                      & No      \\ \hline
+        25                                & 8                      & 6                      & 1                      & No      \\ \hline
+        26                                & 1                      & 2                      & 2                      & No      \\ \hline
+        \end{tabular}
+
+
+For the next subdomain, there are 4 dimensions ($x, y, z, w$) making us require a total of $4^4 + 1 = 257$ tests
+
+\section{Q4}
+In a quadratic equation, there are always two roots. In general, to solve for these roots, you can use the quadratic equation where the roots will always be one of the three: real and distinct, real and equal, or complex. The discriminant is the expression $b^2 - 4ac$ for any quadratic equation $ax^2+bx+c =0$. Based on the sign of this expression, you can determine how many real number solutions the quadratic equation has. This expression is not a linear boundary and is not ideal when weak nx1 testing. To use weak nx1 testing in this case, we would need to have many subdivisions. Further, EPC testing is also not ideal since the domain for a quadratic function is always $(-\infty, \infty)$. This makes it impossible to choose a min and max value. If we bound the inputs, then EPC testing would be possible.
+\section{Q5}
+\begin{align}
+    P(f_1) &= (0. 5)(0. 3)(0. 0) + (0. 5)(0. 7)(0. 1) + (0. 1)(0. 6)(0. 5) + (0. 1)(0. 4)(0. 1) \\&+ (0. 4)(0. 7)(0. 1) + (0.4)(0.3)(0.0) \\
+           &= 0 + 0. 035 + 0. 03 + 0. 004 + 0. 028 + 0 \\
+           &= 0.097
+\end{align}
+\begin{align}
+    P(f_2) &=  (0. 5)(0. 3)(0. 3) + (0. 5)(0. 7)(0. 1) + (0. 1)(0. 6)(0. 1) + (0. 1)(0. 4)(0. 9)  \\&+ (0. 4)(0. 7)(0. 3) + (0.4)(0.3)(0.8) \\
+           &=  0. 045 + 0. 035 + 0. 006 + 0. 036 + 0. 084 + 0. 096 \\
+           &= 0. 302
+\end{align}
+\begin{align}
+    P(f_3) &= (0. 5)(0. 3)(0. 5) + (0. 5)(0. 7)(0. 3) + (0. 1)(0. 6)(0. 0) + (0. 1)(0. 4)(0. 0)  \\&+  (0. 4)(0. 7)(0. 2) + (0. 4)(0.3)(0.0) \\
+           &=  0. 075 + 0. 105 + 0 + 0 + 0. 056 + 0 \\
+           &= 0.236
+\end{align}
+\begin{align}
+    P(f_4) &= (0. 5)(0. 3)(0. 2) + (0. 5)(0. 7)(0. 5) + (0. 1)(0. 6)(0. 4) + (0. 1)(0. 4)(0. 0)  \\&+  (0. 4)(0. 7)(0. 4) + (0. 4)(0.3)(0.2) \\
+           &=  0. 03 + 0. 175 + 0. 024 + 0 + 0. 112 + 0. 024 \\
+           &= 0.365
+\end{align}
+
+Therefore $f_4 > f_2 > f_3 > f_1$
+
+\end{document}
