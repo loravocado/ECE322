@@ -92,8 +92,9 @@ class MyTestCase(unittest.TestCase):
         self.modD.updateData.assert_called_once()
 
     def test_runExit(self):
-        self.modA.runExit()
-        self.modE.exitProgram.assert_called_once()
+        with self.assertRaises(SystemExit) as cm:
+            self.modA.runExit()
+            self.assertEqual(cm.exception.code, 1)
 
     @patch('builtins.print')
     def test_unknownCmd(self, print_mock):
