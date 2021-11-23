@@ -1,6 +1,9 @@
 import unittest
 import sys
-sys.path.append('C:\\Users\\Lora\\Documents\\School\\ECE322\\Lab4\\Lab4_src')
+# sys.path.append('C:\\Users\\Lora\\Documents\\School\\ECE322\\Lab4\\Lab4_src')
+
+sys.path.append('C:\\Users\\lora_\\Documents\\ECE322\\Lab4\\Lab4_src')
+
 
 from io import StringIO
 
@@ -11,9 +14,8 @@ from modules.ModuleA import ModuleA
 
 ### change code
 
-class MyTestCase(unittest.TestCase):
+class TestModuleA(unittest.TestCase):
     def setUp(self):
-        self.modA = Mock()
         self.modB = Mock()
         self.modC = Mock()
         self.modD = Mock()
@@ -95,16 +97,61 @@ class MyTestCase(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             self.modA.runExit()
             self.assertEqual(cm.exception.code, 1)
+            
+    def test_dataGetter(self):
+        self.modA._data = "John"
+        self.assertEqual(self.modA.data, "John")
+
+    def test_dataSetter(self):
+        self.modA.data = "testdata"
+        self.assertEqual(self.modA._f, "testdata")
 
     @patch('builtins.print')
-    def test_unknownCmd(self, print_mock):
+    def test_unknownCmd(self, mockPrint):
         self.modA.run("")
-        print_mock.assert_called_with("Unknown command, type 'help' for command list.")
+        mockPrint.assert_called_with("Unknown command, type 'help' for command list.")
 
     @patch('builtins.print')
-    def test_no_command(self, print_mock):
+    def test_noCommand(self, mockPrint):
         self.modA.run()
-        print_mock.assert_called_with("No command passed!")
+        mockPrint.assert_called_with("No command passed!")
+    
+    @patch('builtins.print')
+    def test_allCommands(self, mockPrint):
+        self.modA.displayHelp = Mock()
+        self.modA.parseLoad = Mock()
+        self.modA.parseAdd = Mock()
+        self.modA.runSort = Mock()
+        self.modA.parseUpdate = Mock()
+        self.modA.parseDelete = Mock()
+        self.modA.runExit = Mock()
+
+        self.modA.run()
+        mockPrint.assert_called_with("No command passed!")
+
+        self.modA.run("beep")
+        mockPrint.assert_called_with("Unknown command, type 'help' for command list.")
+
+        self.modA.run("help")
+        self.modA.displayHelp.assert_called_once()
+
+        self.modA.run("load", "testFilename.txt")
+        self.modA.parseLoad.assert_called_once()
+
+        self.modA.run("update", 1, "John", "1")
+        self.modA.parseUpdate.assert_called_once()
+        
+        self.modA.run("add", "John", "1")
+        self.modA.parseAdd.assert_called_once()
+
+        self.modA.run("delete", 1)
+        self.modA.parseDelete.assert_called_once()
+
+        self.modA.run("sort")
+        self.modA.runSort.assert_called_once()
+
+        self.modA.runExit()
+        self.modA.runExit.assert_called_once()
 
 if __name__ == '__main__':
     unittest.main()
