@@ -54,5 +54,14 @@ class TestModuleB(unittest.TestCase):
         self.modF.displayData.assert_called_once_with(data)
         mockPrint.assert_called_once_with("Could not read file:fileName.txt")
 
+    @patch('builtins.print')
+    @patch('builtins.open')
+    def test_fileNotFoundError(self, mockFile, mockPrint):
+        error = IOError()
+        error.filename = 'fileName.txt'
+        mockFile.side_effect = error
+        data = self.modB.loadFile('file.txt')
+        mockPrint.assert_called_once_with("FileNotFoundError")
+
 if __name__ == '__main__':
     unittest.main()

@@ -28,17 +28,25 @@ class TestModuleE(unittest.TestCase):
             call('D,4\n'),
         ]
         
-        self.modG.updateData('fakefile', data)
-
-        # Assert file is opened properly
-        fileMock.assert_called_once_with('fakefile', 'w')
-
-        # Assert data is properly logged in file and closed
+        self.modG.updateData('fileName.txt', data)
+        fileMock.assert_called_once_with('fileName.txt', 'w')
         file = fileMock()
-
         self.assertEqual(file.write.call_count, 4)
         file.write.assert_has_calls(calls)
         file.__exit__.assert_called()
+
+    @patch('builtins.open', side_effect=FileNotFoundError())
+    @patch('builtins.print')
+    def test_updateDataFileNotFound(self, mockPrint, fileMock):
+        data = [
+            Entry('A', '1'),
+            Entry('B', '2'),
+            Entry('C', '3'),
+            Entry('D', '4'),
+        ]
+        self.modG.updateData('fileName.txt', data)
+        fileMock.assert_called_once_with('fileName.txt', 'w')
+        mockPrint.assert_called_with("Error updating DB File.")
 
 if __name__ == '__main__':
     unittest.main()
