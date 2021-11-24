@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2f4d62da-60da-4e31-af3f-f049571e29fa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Lab4/Lab4.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Lab4/Lab4.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/.idea/Lab4_src.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/MainProgram.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/data.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/data/Entry.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/data/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/fileName.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/modules/ModuleA.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/modules/ModuleB.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/modules/ModuleC.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/modules/ModuleD.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/modules/ModuleE.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/modules/ModuleF.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/modules/ModuleG.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/modules/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/tests/TestModuleA.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/tests/TestModuleB.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/tests/TestModuleC.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/tests/TestModuleD.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/tests/TestModuleE.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/tests/TestModuleF.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/tests/TestModuleG.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/tests/TestRunner.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab4/Lab4_src/tests/__init__.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="21NGY3NTiQFfgdOysHIWlNCGd9z" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Lab4/src" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2f4d62da-60da-4e31-af3f-f049571e29fa" name="Changes" comment="" />
+      <created>1637774176365</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1637774176365</updated>
+      <workItem from="1637774177949" duration="18000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
