@@ -16,36 +16,17 @@ from modules.ModuleA import ModuleA
 
 class TestModuleA(unittest.TestCase):
     def setUp(self):
-        self.b = Mock()
-        self.c = Mock()
-        self.d = Mock()
-        self.e = Mock()
-        self.a = ModuleA(self.b, self.c, self.d, self.e)
-        self.a._data = ["a", "b"]
-
-    def test_parse_delete_with_data(self):
-        self.d.deleteData.return_value = ["a"]
-        self.a._filename = 'fakefile'
-
-        result = self.a.parseDelete(1)
-
-        self.assertEqual(result, True)
-        self.d.deleteData.assert_called_once_with(["a", "b"], 1, 'fakefile')
-
-    def test_parse_delete_without_data(self):
-        self.d.deleteData.return_value = None
-        self.a._filename = 'fakefile'
-
-        result = self.a.parseDelete(1)
-
-        self.assertEqual(result, False)
-        self.d.deleteData.assert_called_once_with(["a", "b"], 1, 'fakefile')
+        self.modB = Mock()
+        self.modC = Mock()
+        self.modD = Mock()
+        self.modE = Mock()
+        
+        self.modA = ModuleA(self.modB, self.modC, self.modD, self.modE)
+        self.modA._data = ["Jane", "Doe"]
 
     @patch('builtins.print')
-    def test_display_help(self, print_mock):
-        result = self.a.displayHelp()
-
-        self.assertEqual(result, True)
+    def test_help(self, print_mock):
+        self.assertEqual(self.modA.displayHelp(), True)
         print_mock.assert_called_once_with(
             "Available Commands: \n"
             "load <filepath>\n"
@@ -55,206 +36,168 @@ class TestModuleA(unittest.TestCase):
             "sort\n"
             "exit"
         )
+    
+    def test_parseDeleteWithoutValue(self):
+        self.modD.deleteData.return_value = None
+        self.modA._filename = "testFile"
+        self.assertEqual(self.modA.parseDelete(1), False)
+        self.modD.deleteData.assert_called_once()
 
-    def test_parse_load_with_data(self):
-        self.b.loadFile.return_value = []
-        result = self.a.parseLoad('fakefile')
+    def test_parseDeleteWithValue(self):
+        self.modD.deleteData.return_value = ["Jane"]
+        self.modA._filename = "testFile"
+        self.assertEqual(self.modA.parseDelete(1), True)
+        self.modD.deleteData.assert_called_once()
 
-        self.assertEqual(result, True)
-        self.b.loadFile.assert_called_once_with('fakefile')
+    def test_parseLoadData(self):
+        self.modB.loadFile.return_value = ["Jane"]
+        self.assertEqual(self.modA.parseLoad("testFilename.txt"), True)
+        self.modB.loadFile.assert_called_once()
 
-    def test_parse_load_without_data(self):
-        self.b.loadFile.return_value = None
-        result = self.a.parseLoad('fakefile')
+    def test_parseLoadNoData(self):
+        self.modB.loadFile.return_value = None
+        self.assertEqual(self.modA.parseLoad("testFilename.txt"), False)
+        self.modB.loadFile.assert_called_once()
 
-        self.assertEqual(result, False)
-        self.b.loadFile.assert_called_once_with('fakefile')
+    def test_parseAddWithData(self):
+        self.modD.insertData.return_value = ["Jane"]
+        self.modA._filename = "testFile"
+        self.assertEqual(self.modA.parseAdd("John", "1"), True)
+        self.modD.insertData.assert_called_once()
 
-    def test_parse_add_with_data(self):
-        self.d.insertData.return_value = ["a"]
-        self.a._filename = 'fakefile'
+    def test_parseAddWithNoData(self):
+        self.modD.insertData.return_value = None
+        self.modA._filename = "testFile"
+        self.assertEqual(self.modA.parseAdd("John", "1"), False)
+        self.modD.insertData.assert_called_once()
 
-        result = self.a.parseAdd('fakename', '23')
+    def test_runSortWithData(self):
+        self.modC.sortData.return_value = ["Jane"]
+        self.assertEqual(self.modA.runSort(), True)
+        self.modC.sortData.assert_called_once()
+        
+    def test_runSortWithNoData(self):
+        self.modC.sortData.return_value = None
+        self.assertEqual(self.modA.runSort(), False)
+        self.modC.sortData.assert_called_once()
 
-        self.assertEqual(result, True)
-        self.d.insertData.assert_called_once_with(["a", "b"], 'fakename', '23', 'fakefile')
+    def test_parseUpdateWithData(self):
+        self.modD.updateData.return_value = ["Data"]
+        self.modA._filename = "testFile"
+        self.assertEqual(self.modA.parseUpdate(1, "John", "1"), True)
+        self.modD.updateData.assert_called_once()
+    
+    def test_parseUpdateWithNoData(self):
+        self.modD.updateData.return_value = None
+        self.modA._filename = "testFile"
+        self.assertEqual(self.modA.parseUpdate(1, "John", "1"), False)
+        self.modD.updateData.assert_called_once()
 
-    def test_parse_add_without_data(self):
-        self.d.insertData.return_value = None
-        self.a._filename = 'fakefile'
+    def test_runExit(self):
+        with self.assertRaises(SystemExit) as cm:
+            self.modA.runExit()
+            self.assertEqual(cm.exception.code, 1)
+            
+    def test_dataGetter(self):
+        self.modA._data = "John"
+        self.assertEqual(self.modA.data, "John")
 
-        result = self.a.parseAdd('fakename', '23')
-
-        self.assertEqual(result, False)
-        self.d.insertData.assert_called_once_with(["a", "b"], 'fakename', '23', 'fakefile')
-
-    def test_run_sort_with_data(self):
-        self.c.sortData.return_value = ["a"]
-
-        result = self.a.runSort()
-
-        self.assertEqual(result, True)
-        self.c.sortData.assert_called_once_with(["a", "b"])
-
-    def test_run_sort_without_data(self):
-        self.c.sortData.return_value = None
-
-        result = self.a.runSort()
-
-        self.assertEqual(result, False)
-        self.c.sortData.assert_called_once_with(["a", "b"])
-
-    def test_parse_update_with_data(self):
-        self.d.updateData.return_value = ["a"]
-        self.a._filename = 'fakefile'
-
-        result = self.a.parseUpdate(1, 'fakename', '23')
-
-        self.assertEqual(result, True)
-        self.d.updateData.assert_called_once_with(["a", "b"], 1, 'fakename', '23', 'fakefile')
-
-    def test_parse_update_without_data(self):
-        self.d.updateData.return_value = None
-        self.a._filename = 'fakefile'
-
-        result = self.a.parseUpdate(1, 'fakename', '23')
-
-        self.assertEqual(result, False)
-        self.d.updateData.assert_called_once_with(["a", "b"], 1, 'fakename', '23', 'fakefile')
-
-    def test_run_exit(self):
-        self.a.runExit()
-        self.e.exitProgram.assert_called_once()
-
-    def test_data_getter(self):
-        self.a._data = "testdata"
-        self.assertEqual(self.a.data, "testdata")
-
-    def test_data_setter(self):
-        self.a.data = "testdata"
-        self.assertEqual(self.a._data, "testdata")
+    def test_dataSetter(self):
+        self.modA.data = "testdata"
+        self.assertEqual(self.modA._f, "testdata")
 
     @patch('builtins.print')
-    def test_no_command(self, print_mock):
-        self.a.run()
-        print_mock.assert_called_with("No command passed!")
+    def test_unknownCmd(self, mockPrint):
+        self.modA.run("")
+        mockPrint.assert_called_with("Unknown command, type 'help' for command list.")
 
     @patch('builtins.print')
-    def test_no_file_loaded_all_cmds(self, print_mock):
-        self.a._data = None
+    def test_noCommand(self, mockPrint):
+        self.modA.run()
+        mockPrint.assert_called_with("No command passed!")
+    
+    @patch('builtins.print')
+    def test_allCommands(self, mockPrint):
+        self.modA.displayHelp = Mock()
+        self.modA.parseLoad = Mock()
+        self.modA.parseAdd = Mock()
+        self.modA.runSort = Mock()
+        self.modA.parseUpdate = Mock()
+        self.modA.parseDelete = Mock()
+        self.modA.runExit = Mock()
 
-        # Stub all function calls
-        self.a.displayHelp = Mock()
-        self.a.parseLoad = Mock()
-        self.a.parseAdd = Mock()
-        self.a.runSort = Mock()
-        self.a.parseUpdate = Mock()
-        self.a.parseDelete = Mock()
-        self.a.runExit = Mock()
+        self.modA.run()
+        mockPrint.assert_called_with("No command passed!")
 
-        # Set up array of tuples of commands to execute
-        # Structure is: (command, should_fail, mock)
-        # where command is the command to pass to ModuleA.run()
-        # and should_fail is a flag to check if the call should fail for no data
-        # and mock is the mock object of the function to check
-        commands = [
-            ("help", False, self.a.displayHelp),
-            ("load", False, self.a.parseLoad),
-            ("add", True, self.a.parseAdd),
-            ("sort", True, self.a.runSort),
-            ("update", True, self.a.parseUpdate),
-            ("delete", True, self.a.parseDelete),
-            ("exit", False, self.a.runExit),
-        ]
+        self.modA.run("beep")
+        mockPrint.assert_called_with("Unknown command, type 'help' for command list.")
 
-        # Run each command
-        for command, should_fail, mock in commands:
-            print_mock.reset_mock()
-            self.a.run(command, "arg1", "arg2", "arg3") # Add generic args so we don't throw any IndexErrors
-            if should_fail:
-                mock.assert_not_called()
-                print_mock.assert_called_with("No file loaded!")
-            else:
-                mock.assert_called()
+        self.modA.run("help")
+        self.modA.displayHelp.assert_called_once()
+
+        self.modA.run("load", "testFilename.txt")
+        self.modA.parseLoad.assert_called_once()
+
+        self.modA.run("update", 1, "John", "1")
+        self.modA.parseUpdate.assert_called_once()
+        
+        self.modA.run("add", "John", "1")
+        self.modA.parseAdd.assert_called_once()
+
+        self.modA.run("delete", 1)
+        self.modA.parseDelete.assert_called_once()
+
+        self.modA.run("sort")
+        self.modA.runSort.assert_called_once()
+
+        self.modA.runExit()
+        self.modA.runExit.assert_called_once()
 
     @patch('builtins.print')
-    def test_bad_arg_count_all_cmds(self, print_mock):
-        # Stub all function calls
-        self.a.displayHelp = Mock()
-        self.a.parseLoad = Mock()
-        self.a.parseAdd = Mock()
-        self.a.runSort = Mock()
-        self.a.parseUpdate = Mock()
-        self.a.parseDelete = Mock()
-        self.a.runExit = Mock()
+    def test_allCommandsNoFile(self, mockPrint):
+        self.modA.displayHelp = Mock()
+        self.modA.parseLoad = Mock()
+        self.modA.parseAdd = Mock()
+        self.modA.runSort = Mock()
+        self.modA.parseUpdate = Mock()
+        self.modA.parseDelete = Mock()
+        self.modA.runExit = Mock()
 
-        # Set up array of tuples of commands to execute
-        # Structure is: (command, should_fail, mock)
-        # where command is the command to pass to ModuleA.run()
-        # and should_fail is a flag to check if the call should fail for no data
-        # and mock is the mock object of the function to check
-        commands = [
-            ("help", False, self.a.displayHelp),
-            ("load", True, self.a.parseLoad),
-            ("add", True, self.a.parseAdd),
-            ("sort", False, self.a.runSort),
-            ("update", True, self.a.parseUpdate),
-            ("delete", True, self.a.parseDelete),
-            ("exit", False, self.a.runExit),
-        ]
+        self.modA._data = None
 
-        # Run each command
-        for command, should_fail, mock in commands:
-            print_mock.reset_mock()
-            self.a.run(command)  # Add generic args so we don't throw any IndexErrors
-            if should_fail:
-                mock.assert_not_called()
-                print_mock.assert_called_with("Malformed command!")
-            else:
-                mock.assert_called()
+        self.modA.run("add", "John", "1")
+        mockPrint.assert_called_with("No file loaded!")
+
+        self.modA.run("delete", 1)
+        mockPrint.assert_called_with("No file loaded!")
+
+        self.modA.run("sort")
+        mockPrint.assert_called_with("No file loaded!")
+
+        self.modA.run("update", 1, "John", "1")
+        mockPrint.assert_called_with("No file loaded!")
 
     @patch('builtins.print')
-    def test_unknown_cmd(self, print_mock):
-        self.a.run("sudo make_me_a_sandwhich")
-        print_mock.assert_called_with("Unknown command, type 'help' for command list.")
+    def test_allCommandsIndexError(self, mockPrint):
+        self.modA.displayHelp = Mock()
+        self.modA.parseLoad = Mock()
+        self.modA.parseAdd = Mock()
+        self.modA.runSort = Mock()
+        self.modA.parseUpdate = Mock()
+        self.modA.parseDelete = Mock()
+        self.modA.runExit = Mock()
 
-    @patch('builtins.print')
-    def test_all_cmds(self, print_mock):
-        # Stub all function calls
-        self.a.displayHelp = Mock()
-        self.a.parseLoad = Mock()
-        self.a.parseAdd = Mock()
-        self.a.runSort = Mock()
-        self.a.parseUpdate = Mock()
-        self.a.parseDelete = Mock()
-        self.a.runExit = Mock()
+        self.modA.run("load")
+        mockPrint.assert_called_with("Malformed command!")
 
-        # Set up array of tuples of commands to execute
-        # Structure is: (command, num_args, mock)
-        # where command is the command to pass to ModuleA.run()
-        # and num_args is how many args should have been passed in
-        # and mock is the mock object of the function to check
-        commands = [
-            ("help", 0, self.a.displayHelp),
-            ("load", 1, self.a.parseLoad),
-            ("add", 2, self.a.parseAdd),
-            ("sort", 0, self.a.runSort),
-            ("update", 3, self.a.parseUpdate),
-            ("delete", 1, self.a.parseDelete),
-            ("exit", 0, self.a.runExit),
-        ]
+        self.modA.run("add")
+        mockPrint.assert_called_with("Malformed command!")
 
-        # Run each command
-        for command, num_args, mock in commands:
-            print_mock.reset_mock()
-            self.a.run(command, "arg1", "arg2", "arg3")  # Add generic args to check for
-            if num_args == 0:
-                mock.assert_called_once()
-            elif num_args == 1:
-                mock.assert_called_once_with("arg1")
-            elif num_args == 2:
-                mock.assert_called_once_with("arg1", "arg2")
-            elif num_args == 3:
-                mock.assert_called_once_with("arg1", "arg2", "arg3")
+        self.modA.run("delete")
+        mockPrint.assert_called_with("Malformed command!")
+
+        self.modA.run("update")
+        mockPrint.assert_called_with("Malformed command!")
+        
 if __name__ == '__main__':
     unittest.main()
